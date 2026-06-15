@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Emilia Torrado – ¿Tu propiedad tiene un ciclo sin cerrar?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose-deep: #C97B84;
+      --rose-mid: #E8A8B0;
+      --rose-pale: #F9EEF0;
+      --rose-blush: #FDF5F6;
+      --gold: #C9A96E;
+      --gold-light: #E8D5B0;
+      --ink: #2C2225;
+      --ink-soft: #6B5458;
+      --white: #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--rose-blush);
+      color: var(--ink);
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      background: linear-gradient(160deg, #2C2225 0%, #4A2D32 60%, #C97B84 100%);
+      padding: 64px 24px 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 70% 30%, rgba(201,121,132,0.25) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(36px, 7vw, 62px);
+      font-weight: 400;
+      line-height: 1.15;
+      color: var(--white);
+      max-width: 680px;
+      margin: 0 auto 16px;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--rose-mid);
+    }
+
+    .hero-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: rgba(255,255,255,0.75);
+      max-width: 480px;
+      margin: 0 auto 40px;
+      line-height: 1.6;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(201,169,110,0.4);
+      border-radius: 100px;
+      padding: 8px 18px;
+      font-size: 12px;
+      color: var(--gold-light);
+      letter-spacing: 0.5px;
+    }
+
+    .hero-badge span { color: rgba(255,255,255,0.5); }
+
+    /* ── INTRO ── */
+    .intro {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 56px 24px 40px;
+      text-align: center;
+    }
+
+    .intro p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(18px, 3vw, 22px);
+      font-weight: 400;
+      line-height: 1.7;
+      color: var(--ink-soft);
+    }
+
+    .intro p strong {
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    .divider {
+      width: 48px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--rose-deep), var(--gold));
+      margin: 32px auto;
+      border-radius: 2px;
+    }
+
+    /* ── QUIZ ── */
+    .quiz-section {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px 64px;
+    }
+
+    .quiz-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .quiz-card {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 40px 36px;
+      box-shadow: 0 4px 40px rgba(44,34,37,0.08);
+    }
+
+    /* Progress */
+    .progress-bar {
+      height: 3px;
+      background: var(--rose-pale);
+      border-radius: 3px;
+      margin-bottom: 36px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--rose-deep), var(--gold));
+      border-radius: 3px;
+      transition: width 0.4s ease;
+      width: 0%;
+    }
+
+    /* Step */
+    .step { display: none; }
+    .step.active { display: block; }
+
+    .step-num {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--rose-deep);
+      margin-bottom: 12px;
+    }
+
+    .step-q {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(20px, 4vw, 26px);
+      font-weight: 600;
+      line-height: 1.35;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .step-hint {
+      font-size: 13px;
+      color: var(--ink-soft);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    /* Options */
+    .options { display: flex; flex-direction: column; gap: 12px; }
+
+    .opt {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 20px;
+      border: 1.5px solid var(--rose-pale);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      background: var(--rose-blush);
+      text-align: left;
+    }
+
+    .opt:hover {
+      border-color: var(--rose-mid);
+      background: var(--rose-pale);
+    }
+
+    .opt.selected {
+      border-color: var(--rose-deep);
+      background: #F9EEF0;
+    }
+
+    .opt-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      width: 32px;
+      text-align: center;
+    }
+
+    .opt-text {
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    /* Input fields */
+    .field-group { display: flex; flex-direction: column; gap: 16px; }
+
+    .field label {
+      display: block;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 8px;
+    }
+
+    .field input, .field select, .field textarea {
+      width: 100%;
+      padding: 14px 16px;
+      border: 1.5px solid var(--rose-pale);
+      border-radius: 10px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--ink);
+      background: var(--rose-blush);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .field input:focus, .field select:focus, .field textarea:focus {
+      border-color: var(--rose-deep);
+      background: var(--white);
+    }
+
+    .field textarea { resize: vertical; min-height: 80px; }
+
+    /* Nav buttons */
+    .btn-next {
+      margin-top: 28px;
+      width: 100%;
+      padding: 17px;
+      background: linear-gradient(135deg, var(--rose-deep), #A85E68);
+      color: var(--white);
+      border: none;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.15s;
+      letter-spacing: 0.3px;
+    }
+
+    .btn-next:hover { opacity: 0.92; transform: translateY(-1px); }
+    .btn-next:active { transform: translateY(0); }
+
+    .btn-back {
+      margin-top: 12px;
+      width: 100%;
+      padding: 12px;
+      background: transparent;
+      color: var(--ink-soft);
+      border: none;
+      border-radius: 12px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      cursor: pointer;
+      transition: color 0.2s;
+    }
+
+    .btn-back:hover { color: var(--rose-deep); }
+
+    /* ── RESULTADO ── */
+    .result { display: none; text-align: center; }
+    .result.active { display: block; }
+
+    .result-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .result-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 5vw, 30px);
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 12px;
+      line-height: 1.3;
+    }
+
+    .result-text {
+      font-size: 15px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      margin-bottom: 32px;
+      max-width: 440px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .btn-calendly {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      background: linear-gradient(135deg, var(--rose-deep), #A85E68);
+      color: var(--white);
+      padding: 18px 36px;
+      border-radius: 14px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+      box-shadow: 0 8px 24px rgba(201,123,132,0.35);
+      margin-bottom: 4px;
+    }
+
+    .btn-calendly:hover { opacity: 0.92; transform: translateY(-2px); }
+
+    .btn-wa-sec {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--ink-soft);
+      padding: 10px 20px;
+      border-radius: 10px;
+      border: 1.5px solid var(--rose-pale);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-wa-sec:hover { border-color: var(--rose-mid); color: var(--ink); }
+
+    .wa-icon {
+      width: 22px;
+      height: 22px;
+      fill: white;
+    }
+
+    .result-note {
+      margin-top: 20px;
+      font-size: 12px;
+      color: var(--ink-soft);
+      opacity: 0.7;
+    }
+
+    /* ── FIRMA ── */
+    .firma {
+      text-align: center;
+      padding: 40px 24px 56px;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .firma-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+
+    .firma-title {
+      font-size: 12px;
+      color: var(--ink-soft);
+      letter-spacing: 0.5px;
+      line-height: 1.6;
+    }
+
+    .firma-divider {
+      width: 32px;
+      height: 1px;
+      background: var(--rose-mid);
+      margin: 16px auto;
+    }
+
+    .firma-legal {
+      font-size: 11px;
+      color: var(--rose-deep);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 480px) {
+      .quiz-card { padding: 28px 20px; }
+      .hero { padding: 52px 20px 68px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eyebrow">Emilia Torrado &nbsp;·&nbsp; Negocios Inmobiliarios</p>
+  <h1>¿Tu propiedad lleva tiempo esperando <em>sin venderse?</em></h1>
+  <p class="hero-sub">A veces no es el precio ni el mercado. Hay casas con historias que necesitan cerrarse antes de pasar a nuevas manos.</p>
+  <div class="hero-badge">
+    <span>🎓</span> Lic. RRHH · Psi. Laboral · Asesora Inmobiliaria
+  </div>
+</section>
+
+<!-- INTRO -->
+<section class="intro">
+  <p>Cada propiedad guarda la energía de quienes la habitaron.<br/>
+  <strong>Los conflictos, las decisiones postergadas, los vínculos sin resolver</strong> — todo eso se siente cuando alguien entra a visitar.</p>
+  <div class="divider"></div>
+  <p>Acompaño a propietarios a <strong>identificar y destrabar esos bloqueos</strong>, para que la venta finalmente fluya.</p>
+</section>
+
+<!-- QUIZ -->
+<section class="quiz-section">
+  <p class="quiz-label">Contame sobre tu propiedad</p>
+
+  <div class="quiz-card">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress"></div>
+    </div>
+
+    <!-- PASO 1 -->
+    <div class="step active" id="step-1">
+      <p class="step-num">Pregunta 1 de 4</p>
+      <h2 class="step-q">¿Cuánto tiempo lleva tu propiedad en el mercado?</h2>
+      <p class="step-hint">Contá desde que decidiste vender, aunque no siempre haya estado publicada.</p>
+      <div class="options">
+        <div class="opt" data-val="menos3" onclick="selectOpt(this, 1)">
+          <span class="opt-icon">🌱</span>
+          <span class="opt-text">Menos de 3 meses — recién empezando</span>
+        </div>
+        <div class="opt" data-val="3a12" onclick="selectOpt(this, 1)">
+          <span class="opt-icon">⏳</span>
+          <span class="opt-text">Entre 3 meses y un año</span>
+        </div>
+        <div class="opt" data-val="mas1" onclick="selectOpt(this, 1)">
+          <span class="opt-icon">🔒</span>
+          <span class="opt-text">Más de un año — ya me cansé de esperar</span>
+        </div>
+        <div class="opt" data-val="nodecidi" onclick="selectOpt(this, 1)">
+          <span class="opt-icon">💭</span>
+          <span class="opt-text">Todavía no la puse, pero quiero vender</span>
+        </div>
+      </div>
+      <button class="btn-next" onclick="nextStep(1)" id="btn-1" disabled>Continuar →</button>
+    </div>
+
+    <!-- PASO 2 -->
+    <div class="step" id="step-2">
+      <p class="step-num">Pregunta 2 de 4</p>
+      <h2 class="step-q">¿Hay algo emocionalmente pendiente con esa propiedad?</h2>
+      <p class="step-hint">A veces lo sabemos, a veces lo intuimos. No hay respuesta incorrecta.</p>
+      <div class="options">
+        <div class="opt" data-val="separacion" onclick="selectOpt(this, 2)">
+          <span class="opt-icon">💔</span>
+          <span class="opt-text">Una separación o divorcio vinculado a la propiedad</span>
+        </div>
+        <div class="opt" data-val="sucesion" onclick="selectOpt(this, 2)">
+          <span class="opt-icon">🏛️</span>
+          <span class="opt-text">Una sucesión o herencia con conflictos entre herederos</span>
+        </div>
+        <div class="opt" data-val="apego" onclick="selectOpt(this, 2)">
+          <span class="opt-icon">🏡</span>
+          <span class="opt-text">Mucho apego — es difícil soltar aunque quiero vender</span>
+        </div>
+        <div class="opt" data-val="nada" onclick="selectOpt(this, 2)">
+          <span class="opt-icon">✨</span>
+          <span class="opt-text">No que yo sepa, pero algo no termina de fluir</span>
+        </div>
+      </div>
+      <button class="btn-next" onclick="nextStep(2)" id="btn-2" disabled>Continuar →</button>
+      <button class="btn-back" onclick="prevStep(2)">← Volver</button>
+    </div>
+
+    <!-- PASO 3 -->
+    <div class="step" id="step-3">
+      <p class="step-num">Pregunta 3 de 4</p>
+      <h2 class="step-q">¿Qué sentís que necesitás para avanzar?</h2>
+      <p class="step-hint">Elegí lo que más resuene, aunque no lo tengas claro del todo.</p>
+      <div class="options">
+        <div class="opt" data-val="entender" onclick="selectOpt(this, 3)">
+          <span class="opt-icon">🔍</span>
+          <span class="opt-text">Entender por qué no avanza y qué hacer</span>
+        </div>
+        <div class="opt" data-val="precio" onclick="selectOpt(this, 3)">
+          <span class="opt-icon">📊</span>
+          <span class="opt-text">Saber si el precio está bien o hay que ajustarlo</span>
+        </div>
+        <div class="opt" data-val="acompanamiento" onclick="selectOpt(this, 3)">
+          <span class="opt-icon">🫂</span>
+          <span class="opt-text">Alguien que entienda la situación y me acompañe</span>
+        </div>
+        <div class="opt" data-val="todo" onclick="selectOpt(this, 3)">
+          <span class="opt-icon">🌟</span>
+          <span class="opt-text">Todo lo anterior — quiero una mirada integral</span>
+        </div>
+      </div>
+      <button class="btn-next" onclick="nextStep(3)" id="btn-3" disabled>Continuar →</button>
+      <button class="btn-back" onclick="prevStep(3)">← Volver</button>
+    </div>
+
+    <!-- PASO 4 -->
+    <div class="step" id="step-4">
+      <p class="step-num">Último paso</p>
+      <h2 class="step-q">¿Cómo te contacto?</h2>
+      <p class="step-hint">Te respondo personalmente. Sin llamados de un call center.</p>
+      <div class="field-group">
+        <div class="field">
+          <label>Tu nombre</label>
+          <input type="text" id="nombre" placeholder="¿Cómo te llamás?" />
+        </div>
+        <div class="field">
+          <label>WhatsApp</label>
+          <input type="tel" id="telefono" placeholder="Tu número (con código de área)" />
+        </div>
+        <div class="field">
+          <label>Zona / barrio de la propiedad</label>
+          <input type="text" id="zona" placeholder="Ej: Vicente López, San Justo, Almagro..." />
+        </div>
+        <div class="field">
+          <label>¿Está publicada en internet? <span style="font-weight:300;text-transform:none;letter-spacing:0">Pegá el link acá (opcional)</span></label>
+          <input type="text" id="linkpropiedad" placeholder="Ej: zonaprop.com.ar/..." />
+        </div>
+        <div class="field">
+          <label>¿Algo más que quieras contarme? <span style="font-weight:300;text-transform:none;letter-spacing:0">(opcional)</span></label>
+          <textarea id="mensaje" placeholder="Podés escribir lo que quieras, con total confianza."></textarea>
+        </div>
+      </div>
+      <button class="btn-next" onclick="enviar()" id="btn-4">Quiero hablar con Emilia →</button>
+      <button class="btn-back" onclick="prevStep(4)">← Volver</button>
+    </div>
+
+    <!-- RESULTADO -->
+    <div class="result" id="result">
+      <div class="result-icon">🌸</div>
+      <h2 class="result-title">¡Gracias, <span id="result-nombre"></span>!</h2>
+      <p class="result-text">
+        Ya leí tu situación y tengo una idea de lo que puede estar pasando.<br/>
+        El siguiente paso es una <strong>videollamada de 20 minutos</strong> para que me cuentes y veamos cómo puedo ayudarte.
+      </p>
+      <a href="https://calendly.com/emiliatorrado-de/30min" class="btn-calendly" target="_blank">
+        📅 &nbsp;Agendá tu videollamada gratuita
+      </a>
+      <p class="result-note" style="margin-top:16px;margin-bottom:8px;">¿Preferís escribirme directamente?</p>
+      <a href="#" id="wa-link" class="btn-wa-sec" target="_blank">
+        <svg style="width:18px;height:18px;fill:#25D366;flex-shrink:0" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Escribirle a Emilia por WhatsApp
+      </a>
+      <p class="result-note" style="margin-top:16px;">Te respondo en el día 🌸</p>
+    </div>
+
+  </div><!-- /quiz-card -->
+</section>
+
+<!-- FIRMA -->
+<footer class="firma">
+  <p class="firma-name">Emilia Torrado</p>
+  <div class="firma-divider"></div>
+  <p class="firma-title">
+    Lic. en RRHH · Psi. Laboral · Asesora Inmobiliaria<br/>
+    VL Realtor S.R.L. · CUCICBA 7615 · CSI 6609
+  </p>
+  <div class="firma-divider"></div>
+  <p class="firma-legal">Entiendo personas. Acompaño decisiones.</p>
+</footer>
+
+<script>
+  // ── ESTADO ──
+  const answers = { q1: null, q2: null, q3: null };
+  const TOTAL = 4;
+
+  // Número de WhatsApp de Emilia (reemplazar con el real)
+  const WA_NUMBER = '5491164413328';
+
+  function updateProgress(step) {
+    const pct = ((step - 1) / TOTAL) * 100;
+    document.getElementById('progress').style.width = pct + '%';
+  }
+
+  function selectOpt(el, step) {
+    const opts = el.parentElement.querySelectorAll('.opt');
+    opts.forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    answers['q' + step] = el.dataset.val;
+    const btn = document.getElementById('btn-' + step);
+    if (btn) btn.disabled = false;
+  }
+
+  function nextStep(current) {
+    document.getElementById('step-' + current).classList.remove('active');
+    const next = current + 1;
+    document.getElementById('step-' + next).classList.add('active');
+    updateProgress(next);
+    window.scrollTo({ top: document.querySelector('.quiz-card').offsetTop - 24, behavior: 'smooth' });
+  }
+
+  function prevStep(current) {
+    document.getElementById('step-' + current).classList.remove('active');
+    const prev = current - 1;
+    document.getElementById('step-' + prev).classList.add('active');
+    updateProgress(prev);
+    window.scrollTo({ top: document.querySelector('.quiz-card').offsetTop - 24, behavior: 'smooth' });
+  }
+
+  function enviar() {
+    const nombre = document.getElementById('nombre').value.trim();
+    const telefono = document.getElementById('telefono').value.trim();
+    const zona = document.getElementById('zona').value.trim();
+    const mensaje = document.getElementById('mensaje').value.trim();
+    const linkprop = document.getElementById('linkpropiedad').value.trim();
+
+    if (!nombre || !telefono || !zona) {
+      alert('Por favor completá tu nombre, WhatsApp y la zona de la propiedad 🌸');
+      return;
+    }
+
+    // Mapeos de respuestas
+    const q1map = { menos3: 'menos de 3 meses', '3a12': 'entre 3 meses y 1 año', mas1: 'más de 1 año', nodecidi: 'todavía sin publicar pero quiero vender' };
+    const q2map = { separacion: 'separación/divorcio vinculado', sucesion: 'sucesión con conflictos', apego: 'mucho apego emocional', nada: 'algo no fluye (sin causa clara)' };
+    const q3map = { entender: 'entender por qué no avanza', precio: 'validar si el precio es correcto', acompanamiento: 'acompañamiento personalizado', todo: 'mirada integral (todo lo anterior)' };
+
+    const textoWA = encodeURIComponent(
+`Hola Emilia 🌸 Vi tu reel y quiero contarte sobre mi propiedad.
+
+👤 Me llamo: ${nombre}
+📍 Zona: ${zona}
+📱 WhatsApp: ${telefono}
+
+⏳ Tiempo en el mercado: ${q1map[answers.q1] || '-'}
+💭 Situación emocional: ${q2map[answers.q2] || '-'}
+🎯 Lo que necesito: ${q3map[answers.q3] || '-'}
+${linkprop ? '\n🔗 Publicación: ' + linkprop : ''}
+${mensaje ? '\n📝 Comentario: ' + mensaje : ''}
+
+¿Podemos hablar?`
+    );
+
+    const waURL = `https://wa.me/${WA_NUMBER}?text=${textoWA}`;
+
+    // Mostrar resultado
+    document.getElementById('step-4').classList.remove('active');
+    document.getElementById('result-nombre').textContent = nombre;
+    document.getElementById('wa-link').href = waURL;
+    document.getElementById('result').classList.add('active');
+    document.getElementById('progress').style.width = '100%';
+
+    window.scrollTo({ top: document.querySelector('.quiz-card').offsetTop - 24, behavior: 'smooth' });
+  }
+
+  // Init
+  updateProgress(1);
+</script>
+</body>
+</html>
