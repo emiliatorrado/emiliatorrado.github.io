@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Los Cipreses Tortugas UF13 · Última unidad · Pilar Km 38,5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,500;1,9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --pine:#182920;
+    --pine-deep:#0f1c15;
+    --parchment:#f4efe3;
+    --parchment-dim:#e9e1cf;
+    --brass:#b08d57;
+    --brass-light:#d8b97f;
+    --rust:#8a3a2b;
+    --ink:#16221a;
+    --ink-soft:#3f4a41;
+    --white-soft:#fbf8f2;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Inter',sans-serif;
+    background:var(--parchment);
+    color:var(--ink);
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    background:
+      linear-gradient(180deg, rgba(15,28,21,0.55) 0%, rgba(15,28,21,0.72) 55%, var(--pine-deep) 100%),
+      url('images/hero-piscina.jpg');
+    background-size:cover;
+    background-position:center 65%;
+    color:var(--parchment);
+    padding:52px 24px 70px;
+    position:relative;
+    overflow:hidden;
+  }
+  .hero::after{
+    content:"";
+    position:absolute; inset:0;
+    background-image:
+      linear-gradient(var(--brass) 1px, transparent 1px);
+    background-size: 100% 84px;
+    opacity:0.045;
+    pointer-events:none;
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:12.5px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--brass-light);
+    display:flex;
+    align-items:center;
+    gap:10px;
+    opacity:0;
+    animation:riseIn .7s ease .05s forwards;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px; height:1px;
+    background:var(--brass-light);
+    display:inline-block;
+  }
+  h1{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:clamp(2.1rem, 8vw, 3.4rem);
+    line-height:1.04;
+    margin-top:18px;
+    letter-spacing:-0.01em;
+    opacity:0;
+    animation:riseIn .7s ease .18s forwards;
+  }
+  h1 em{
+    font-style:italic;
+    font-weight:500;
+    color:var(--brass-light);
+  }
+  .hero-sub{
+    margin-top:16px;
+    max-width:46ch;
+    color:#cfd8ce;
+    font-size:1.02rem;
+    opacity:0;
+    animation:riseIn .7s ease .3s forwards;
+  }
+
+  @keyframes riseIn{
+    from{opacity:0; transform:translateY(14px);}
+    to{opacity:1; transform:translateY(0);}
+  }
+
+  /* ---------- STAMP CARD (signature element) ---------- */
+  .stamp-card{
+    margin-top:34px;
+    background:var(--white-soft);
+    color:var(--ink);
+    border-radius:2px;
+    padding:26px 24px 22px;
+    max-width:420px;
+    position:relative;
+    box-shadow:0 30px 60px -20px rgba(0,0,0,0.5);
+    opacity:0;
+    animation:riseIn .8s ease .46s forwards;
+  }
+  .stamp-card::before{
+    content:"";
+    position:absolute; inset:0;
+    border:1px solid rgba(22,34,26,0.12);
+    border-radius:2px;
+    pointer-events:none;
+  }
+  .stamp-row{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-end;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+  .price-label{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.1em;
+    text-transform:uppercase;
+    color:var(--ink-soft);
+  }
+  .price-old{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:14px;
+    color:var(--rust);
+    text-decoration:line-through;
+    text-decoration-thickness:1.5px;
+    margin-top:2px;
+  }
+  .price{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:2.1rem;
+    color:var(--pine);
+    letter-spacing:-0.01em;
+    margin-top:2px;
+  }
+  .stamp-seal{
+    flex-shrink:0;
+    width:88px; height:88px;
+    border-radius:50%;
+    border:1.5px solid var(--pine);
+    color:var(--pine);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:9.5px;
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+    line-height:1.25;
+    transform:rotate(-11deg);
+    padding:6px;
+  }
+  .stamp-divider{
+    height:1px;
+    background:repeating-linear-gradient(90deg, rgba(22,34,26,0.25) 0 6px, transparent 6px 11px);
+    margin:18px 0;
+  }
+  .stamp-facts{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px 18px;
+    font-size:13px;
+  }
+  .stamp-facts div span{
+    display:block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    color:var(--ink-soft);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin-bottom:2px;
+  }
+
+  /* ---------- SECTION SHELL ---------- */
+  section{
+    padding:56px 24px;
+    max-width:640px;
+    margin:0 auto;
+  }
+  .kicker{
+    font-family:'IBM Plex Mono',monospace;
+    font-size:11.5px;
+    letter-spacing:0.12em;
+    text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:10px;
+  }
+  h2{
+    font-family:'Fraunces',serif;
+    font-weight:600;
+    font-size:1.6rem;
+    color:var(--pine);
+    letter-spacing:-0.01em;
+    margin-bottom:6px;
+  }
+
+  /* ---------- FILTER (2 questions) ---------- */
+  .filter-box{
+    background:var(--pine);
+    border-radius:4px;
+    padding:32px 24px;
+    color:var(--parchment);
+  }
+  .filter-box h2{color:var(--parchment);}
+  .filter-box .kicker{color:var(--brass-light);}
+  .q-block{margin-top:26px;}
+  .q-title{
+    font-size:14.5px;
+    font-weight:600;
+    margin-bottom:12px;
+    color:#e7e2d3;
+  }
+  .opts{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+  }
+  .opt{
+    display:block;
+    width:100%;
+    text-align:left;
+    background:rgba(244,239,227,0.06);
+    border:1px solid rgba(244,239,227,0.18);
+    color:var(--parchment);
+    padding:13px 16px;
+    border-radius:3px;
+    font-family:'Inter',sans-serif;
+    font-size:14.5px;
+    cursor:pointer;
+    transition:background .15s ease, border-color .15s ease, transform .1s ease;
+  }
+  .opt:hover{background:rgba(244,239,227,0.12);}
+  .opt.selected{
+    background:var(--brass);
+    border-color:var(--brass);
+    color:var(--pine-deep);
+    font-weight:600;
+  }
+  .cta-wrap{
+    margin-top:28px;
+    opacity:0.4;
+    pointer-events:none;
+    transition:opacity .25s ease;
+  }
+  .cta-wrap.active{opacity:1; pointer-events:auto;}
+  .cta-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:10px;
+    width:100%;
+    background:#25D366;
+    color:#0b2b16;
+    font-weight:700;
+    font-size:15.5px;
+    padding:16px 20px;
+    border:none;
+    border-radius:3px;
+    cursor:pointer;
+    text-decoration:none;
+  }
+  .cta-btn svg{width:19px;height:19px;flex-shrink:0;}
+  .cta-hint{
+    margin-top:10px;
+    font-size:12px;
+    color:#9fae9f;
+    text-align:center;
+  }
+
+  /* ---------- FAQ ---------- */
+  .faq-item{
+    border-top:1px solid rgba(22,34,26,0.13);
+    padding:20px 0;
+  }
+  .faq-item:last-child{border-bottom:1px solid rgba(22,34,26,0.13);}
+  .faq-q{
+    font-weight:600;
+    font-size:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:12px;
+  }
+  .faq-a{
+    margin-top:8px;
+    color:var(--ink-soft);
+    font-size:14.5px;
+    max-width:52ch;
+  }
+  .tag{
+    display:inline-block;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    padding:3px 8px;
+    border-radius:2px;
+    background:var(--parchment-dim);
+    color:var(--ink-soft);
+    flex-shrink:0;
+  }
+  .tag.yes{background:#dfe9df; color:#20522f;}
+  .tag.no{background:#f0dcd6; color:var(--rust);}
+
+  /* ---------- DISTRIBUCION ---------- */
+  .plantas{
+    display:grid;
+    grid-template-columns:1fr;
+    gap:14px;
+    margin-top:20px;
+  }
+  @media(min-width:560px){ .plantas{grid-template-columns:1fr 1fr;} }
+  .planta-card{
+    background:var(--white-soft);
+    border:1px solid rgba(22,34,26,0.1);
+    border-radius:3px;
+    padding:20px;
+  }
+  .planta-card .kicker{margin-bottom:12px;}
+  .planta-card ul{list-style:none;}
+  .planta-card li{
+    font-size:14px;
+    padding:6px 0;
+    border-bottom:1px dashed rgba(22,34,26,0.12);
+  }
+  .planta-card li:last-child{border-bottom:none;}
+
+  /* ---------- GALERIA ---------- */
+  .gallery{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:10px;
+    margin-top:20px;
+  }
+  .gallery figure{
+    margin:0;
+    border-radius:3px;
+    overflow:hidden;
+    position:relative;
+    background:var(--parchment-dim);
+  }
+  .gallery figure.wide{grid-column:1 / -1;}
+  .gallery img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+    aspect-ratio:4/3;
+  }
+  .gallery figure.wide img{aspect-ratio:16/9;}
+  .gallery figcaption{
+    position:absolute;
+    left:0; right:0; bottom:0;
+    padding:8px 10px 7px;
+    background:linear-gradient(0deg, rgba(15,28,21,0.78), transparent);
+    color:var(--parchment);
+    font-family:'IBM Plex Mono',monospace;
+    font-size:10.5px;
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+
+  /* ---------- MAPA ---------- */
+  .map-wrap{
+    border-radius:3px;
+    overflow:hidden;
+    border:1px solid rgba(22,34,26,0.12);
+  }
+  .map-wrap iframe{
+    width:100%;
+    height:260px;
+    border:0;
+    display:block;
+  }
+  .map-link{
+    display:inline-block;
+    margin-top:12px;
+    font-size:13.5px;
+    font-weight:600;
+    color:var(--pine);
+    text-decoration:none;
+    border-bottom:1px solid var(--brass);
+  }
+
+  /* ---------- UBICACION EN EL COMPLEJO ---------- */
+  .ubicacion{
+    display:flex;
+    gap:18px;
+    align-items:center;
+    background:var(--white-soft);
+    border:1px solid rgba(22,34,26,0.1);
+    border-radius:3px;
+    padding:16px;
+    margin-top:20px;
+    flex-wrap:wrap;
+  }
+  .ubicacion img{
+    width:150px;
+    border-radius:2px;
+    flex-shrink:0;
+  }
+  .ubicacion p{
+    font-size:13.5px;
+    color:var(--ink-soft);
+    flex:1;
+    min-width:200px;
+  }
+
+  
+  .invest{
+    background:var(--parchment-dim);
+    border-left:3px solid var(--brass);
+    padding:20px 22px;
+    border-radius:0 3px 3px 0;
+    font-size:14.5px;
+    color:var(--ink-soft);
+  }
+  .invest strong{color:var(--pine); font-weight:600;}
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    background:var(--pine);
+    border-radius:4px;
+    padding:36px 26px;
+    text-align:center;
+    color:var(--parchment);
+  }
+  .closing-q{
+    font-family:'Fraunces',serif;
+    font-style:italic;
+    font-weight:500;
+    font-size:1.5rem;
+    line-height:1.3;
+    color:var(--brass-light);
+    max-width:34ch;
+    margin:0 auto 14px;
+  }
+  .closing-p{
+    font-size:14.5px;
+    color:#d3dbd1;
+    max-width:44ch;
+    margin:0 auto 22px;
+  }
+  .closing-cta{
+    display:inline-block;
+    background:var(--brass);
+    color:var(--pine-deep);
+    font-weight:700;
+    font-size:14.5px;
+    padding:14px 26px;
+    border-radius:3px;
+    text-decoration:none;
+  }
+
+  /* ---------- FOOTER ---------- */
+  footer{
+    background:var(--pine-deep);
+    color:#b7c2b7;
+    padding:40px 24px 32px;
+    font-size:12.5px;
+    line-height:1.65;
+  }
+  footer .agent{
+    color:var(--parchment);
+    font-family:'Fraunces',serif;
+    font-size:1.15rem;
+    font-weight:600;
+    margin-bottom:2px;
+  }
+  footer .agent-role{color:var(--brass-light); font-size:13px; margin-bottom:14px;}
+  footer .legal{
+    margin-top:22px;
+    padding-top:18px;
+    border-top:1px solid rgba(183,194,183,0.15);
+    color:#7f8c7f;
+  }
+
+  /* sticky mobile whatsapp bar */
+  .sticky-wa{
+    position:fixed;
+    bottom:0; left:0; right:0;
+    background:var(--pine-deep);
+    padding:12px 16px;
+    display:flex;
+    justify-content:center;
+    z-index:50;
+    box-shadow:0 -8px 24px rgba(0,0,0,0.25);
+  }
+  .sticky-wa a{
+    display:flex; align-items:center; gap:8px;
+    background:#25D366; color:#0b2b16;
+    font-weight:700; font-size:14.5px;
+    padding:12px 22px; border-radius:3px;
+    text-decoration:none;
+  }
+  .sticky-wa svg{width:17px;height:17px;}
+  body{padding-bottom:64px;}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="eyebrow">Los Cipreses Tortugas · Km 38,5 · Pilar</div>
+  <h1>Última unidad<br><em>disponible.</em><br>Escritura este año.</h1>
+  <p class="hero-sub">Dúplex de 3 ambientes con jardín propio, pileta y cochera. Apto crédito primera escritura Banco Francés, y préstamo Banco Ciudad hasta USD 30.000 si te falta para llegar. A 2 minutos de Panamericana.</p>
+
+  <div class="stamp-card">
+    <div class="stamp-row">
+      <div>
+        <div class="price-label">Valor de venta</div>
+        <div class="price-old">USD 130.000</div>
+        <div class="price">HOY USD 127.000</div>
+      </div>
+      <div class="stamp-seal">Primera<br>escritura<br>este año</div>
+    </div>
+    <div class="stamp-divider"></div>
+    <div class="stamp-facts">
+      <div><span>Ambientes</span>3, dúplex</div>
+      <div><span>Dormitorios</span>2, con baño en suite</div>
+      <div><span>Exterior</span>Jardín propio + parrilla</div>
+      <div><span>Construcción</span>2023 · apto mascota</div>
+    </div>
+  </div>
+</div>
+
+<section class="filter-box" id="filtro">
+  <div class="kicker">Antes de escribirnos</div>
+  <h2>Respondé estas 2 preguntas</h2>
+  <p style="color:#c3ccc3; font-size:14px; margin-top:4px;">Así te enviamos la información adecuada, sin vueltas.</p>
+
+  <div class="q-block">
+    <div class="q-title">1. ¿Cómo pensás comprar?</div>
+    <div class="opts" data-group="pago">
+      <button class="opt" data-value="Ya tengo los fondos disponibles">Ya tengo los fondos disponibles</button>
+      <button class="opt" data-value="Primero tengo que vender una propiedad">Primero tengo que vender una propiedad</button>
+      <button class="opt" data-value="Estoy evaluando crédito (Banco Francés o Banco Ciudad)">Estoy evaluando crédito (Banco Francés o Banco Ciudad)</button>
+    </div>
+  </div>
+
+  <div class="q-block">
+    <div class="q-title">2. ¿En qué etapa estás?</div>
+    <div class="opts" data-group="plazo">
+      <button class="opt" data-value="Quiero visitarlo esta semana">Quiero visitarlo esta semana</button>
+      <button class="opt" data-value="Estoy comparando opciones">Estoy comparando opciones</button>
+      <button class="opt" data-value="Solo quiero recibir información por ahora">Solo quiero recibir información por ahora</button>
+    </div>
+  </div>
+
+  <div class="cta-wrap" id="ctaWrap">
+    <a class="cta-btn" id="ctaBtn" href="#" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.71.45 3.38 1.29 4.85L2 22l5.4-1.42a9.9 9.9 0 0 0 4.64 1.18h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.83 9.83 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.25 8.24z"/></svg>
+      Coordinar visita por WhatsApp
+    </a>
+    <p class="cta-hint">Seleccioná las dos opciones para continuar</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Distribución</div>
+  <h2>Un dúplex pensado en dos plantas</h2>
+  <div class="plantas">
+    <div class="planta-card">
+      <div class="kicker">Planta baja</div>
+      <ul>
+        <li>Living comedor amplio y luminoso</li>
+        <li>Cocina integrada con isla de mármol y desayunador</li>
+        <li>Toilette de recepción</li>
+        <li>Baulera / despensa bajo escalera</li>
+        <li>Lavadero independiente</li>
+        <li>Salida a jardín propio con parrilla</li>
+        <li>Acceso directo a cochera</li>
+      </ul>
+    </div>
+    <div class="planta-card">
+      <div class="kicker">Planta alta</div>
+      <ul>
+        <li>2 dormitorios con placard</li>
+        <li>Baño completo con bañera en suite</li>
+        <li>Vista abierta al pulmón verde</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="planta-card" style="margin-top:14px;">
+    <div class="kicker">Características destacadas</div>
+    <ul>
+      <li>Losa radiante</li>
+      <li>Ventanales con DVH (doble vidrio hermético)</li>
+      <li>Excelente luminosidad y ventilación</li>
+      <li>Apto mascota</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Amenities del condominio</div>
+  <h2>Todo lo que no tenés que mantener vos</h2>
+  <div class="planta-card">
+    <ul>
+      <li>Parque central</li>
+      <li>Dos piletas + solárium</li>
+      <li>SUM</li>
+      <li>Bicicletero</li>
+      <li>Estacionamiento de cortesía para visitas</li>
+      <li>Portón automático con control para propietarios</li>
+      <li>Seguridad: cerco eléctrico y cámaras</li>
+      <li>Iluminación perimetral LED</li>
+    </ul>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Ubicación</div>
+  <h2>Los Cipreses Tortugas, Pilar</h2>
+  <p style="color:var(--ink-soft); font-size:14.5px; margin-bottom:16px;">Panamericana Ramal Pilar Km 38,5 · Tortugas Norte, Pilar.</p>
+  <div class="map-wrap">
+    <iframe
+      src="https://www.google.com/maps?q=Los+Cipreses+Tortugas,+Panamericana+Ramal+Pilar+Km+38.5,+Pilar,+Buenos+Aires&output=embed"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade">
+    </iframe>
+  </div>
+  <a href="https://share.google/B419cgMBumdChqy5k" target="_blank" rel="noopener" class="map-link">Ver ubicación exacta en Google Maps →</a>
+</section>
+
+<section>
+  <div class="kicker">La unidad, en fotos</div>
+  <h2>Así se ve hoy</h2>
+  <div class="gallery">
+    <figure class="wide">
+      <img src="images/fachada.jpg" alt="Fachada del dúplex">
+      <figcaption>Fachada</figcaption>
+    </figure>
+    <figure>
+      <img src="images/living.jpg" alt="Living comedor">
+      <figcaption>Living comedor</figcaption>
+    </figure>
+    <figure>
+      <img src="images/cocina.jpg" alt="Cocina">
+      <figcaption>Cocina</figcaption>
+    </figure>
+    <figure>
+      <img src="images/dormitorio-principal.jpg" alt="Dormitorio principal">
+      <figcaption>Dormitorio principal</figcaption>
+    </figure>
+    <figure>
+      <img src="images/dormitorio-2.jpg" alt="Segundo dormitorio">
+      <figcaption>Segundo dormitorio</figcaption>
+    </figure>
+    <figure>
+      <img src="images/bano.jpg" alt="Baño en suite">
+      <figcaption>Baño en suite</figcaption>
+    </figure>
+    <figure>
+      <img src="images/patio-propio.jpg" alt="Patio propio">
+      <figcaption>Patio propio</figcaption>
+    </figure>
+    <figure class="wide">
+      <img src="images/jardin-comun.jpg" alt="Jardín y pileta común">
+      <figcaption>Amenities · jardín y pileta</figcaption>
+    </figure>
+  </div>
+
+  <div class="ubicacion">
+    <img src="images/plano-complejo.jpg" alt="Plano del complejo, unidad 13 marcada">
+    <p><strong style="color:var(--pine);">Unidad 13</strong>, ubicada frente al parque central del complejo — a metros de la pileta, el solárium y el SUM.</p>
+  </div>
+</section>
+
+<section>
+  <div class="kicker">Lo que siempre preguntan</div>
+  <h2>Antes de escribir, esto ya lo sabés</h2>
+
+  <div class="faq-item">
+    <div class="faq-q">¿Cuánto son las expensas? <span class="tag">$200.000</span></div>
+    <div class="faq-a">Aproximadamente $200.000 por mes, incluyendo mantenimiento de parque, piletas, SUM y seguridad.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">¿Tiene vigilancia? <span class="tag yes">Sí</span></div>
+    <div class="faq-a">Cerco perimetral eléctrico y cámaras las 24 horas. Es un condominio (no un barrio cerrado), rodeado de quintas, con seguridad propia del complejo.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">¿Tiene escritura? <span class="tag yes">Este año</span></div>
+    <div class="faq-a">Es la primera escritura del desarrollo, que ya lleva 3 años consolidado. Se avanza mediante cesión de boleto hasta ese momento.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">¿Qué tan cerca está de todo? <span class="tag yes">Muy cerca</span></div>
+    <div class="faq-a">A 2 minutos de Panamericana y a 3 minutos del centro comercial Las Piedras. En la zona también hay supermercado Disco, colegios y centros deportivos, todo a poca distancia.</div>
+  </div>
+
+  <div class="faq-item">
+    <div class="faq-q">¿Financian la compra? <span class="tag yes">Sí</span></div>
+    <div class="faq-a">Apto crédito primera escritura con Banco Francés (te pasamos el contacto directo). Además, Banco Ciudad ofrece préstamo de hasta USD 30.000 si te falta una parte para completar.</div>
+  </div>
+</section>
+
+<section>
+  <div class="invest">
+    <strong>Dato para quien piensa en inversión:</strong> un dúplex similar en el mismo desarrollo se alquila hoy en USD 1.200 por mes — una renta que convierte esta unidad en una opción concreta para diversificar en dólares, no solo para vivienda propia.
+  </div>
+</section>
+
+<section class="closing">
+  <h2 class="closing-q">¿Buscás una casa con jardín sin pagar el valor de un barrio cerrado?</h2>
+  <p class="closing-p">Esta es la última unidad disponible de un condominio consolidado, con espacios verdes, pileta, SUM, seguridad y excelente acceso. Coordiná tu visita y conocela personalmente.</p>
+  <a href="#filtro" class="closing-cta">Coordinar mi visita ↑</a>
+</section>
+
+<footer>
+  <div class="agent">Emilia Torrado</div>
+  <div class="agent-role">Asesora Inmobiliaria · 11 6441-3328</div>
+  <div>VL Realtor SRL · Corredor Diego E. Mastrangelo · MAT. CMCPSI N° 6609 · MAT. CUCICBA N° 7615</div>
+  <div class="legal">
+    En cumplimiento de las leyes vigentes que regulan el corretaje inmobiliario (Ley 25.028, Ley 22.802 de Lealtad Comercial, Ley 24.240 de Defensa al Consumidor, normas del Código Civil y Comercial de la Nación y Constitucionales), los agentes no ejercen el corretaje inmobiliario. Todas las operaciones son objeto de intermediación y conclusión por parte de los martilleros y corredores colegiados detallados arriba.
+  </div>
+</footer>
+
+<div class="sticky-wa">
+  <a href="https://wa.me/5491164413328?text=Hola%20Emilia!%20Vi%20el%20d%C3%BAplex%20de%20Los%20Cipreses%20UF13%20y%20quiero%20coordinar%20una%20visita." target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.71.45 3.38 1.29 4.85L2 22l5.4-1.42a9.9 9.9 0 0 0 4.64 1.18h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.83 9.83 0 0 0 12.04 2zm0 18.13h-.01a8.2 8.2 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.26-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.55-3.7 8.24-8.25 8.24z"/></svg>
+    Escribir ahora
+  </a>
+</div>
+
+<script>
+  const selections = { pago: null, plazo: null };
+  const ctaBtn = document.getElementById('ctaBtn');
+  const ctaWrap = document.getElementById('ctaWrap');
+  const phone = "5491164413328";
+
+  document.querySelectorAll('.opts').forEach(group => {
+    const key = group.dataset.group;
+    group.querySelectorAll('.opt').forEach(btn => {
+      btn.addEventListener('click', () => {
+        group.querySelectorAll('.opt').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+        selections[key] = btn.dataset.value;
+        updateCta();
+      });
+    });
+  });
+
+  function updateCta(){
+    if(selections.pago && selections.plazo){
+      ctaWrap.classList.add('active');
+      const msg = `Hola Emilia! Vi el dúplex de Los Cipreses UF13 (USD 127.000).%0A%0ACompra: ${encodeURIComponent(selections.pago)}%0AEtapa: ${encodeURIComponent(selections.plazo)}%0A%0AQuiero coordinar una visita.`;
+      ctaBtn.href = `https://wa.me/${phone}?text=${msg}`;
+    }
+  }
+</script>
+
+</body>
+</html>
